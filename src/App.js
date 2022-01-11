@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import NavBar from './components/Nav-bar';
+import { useState, useEffect } from "react";
+import FrontpageList from './components/Fontpage-list';
+import { getCategories } from './utils/api'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ReviewsByCategory from './components/Reviews-by-category';
+import AllReviews from './components/All-reviews';
 
 function App() {
+  const [navCategories, setNavCategories] = useState([])
+  useEffect(() => {
+    getCategories().then((categoriesData) => {
+        setNavCategories(categoriesData)
+    })
+  }, [])
+
+
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar navCategories={navCategories} />
+      <Header />
+      <Routes>
+        <Route path="/" element={<FrontpageList navCategories={navCategories} />} />
+        <Route path="/reviews/all" element={<AllReviews />} />
+        <Route path="/reviews/:category" element={<ReviewsByCategory />} />
+        
+
+
+
+
+      </Routes>   
     </div>
+    </BrowserRouter>
   );
 }
 
