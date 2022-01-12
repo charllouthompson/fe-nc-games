@@ -8,14 +8,11 @@ const ReviewsByCategory = () => {
     const [categoryReviews, setCategoryReviews] = useState([])
     useEffect(() => {
         getReviewsByCategories(category).then((reviewsData) => {
-            console.log(reviewsData)
             setCategoryReviews(reviewsData)
         })
-    }, [])
-    console.log("after review", categoryReviews)
+    }, [category])
     return (
         <div>
-            <p>Hi</p>
             <ul>
             {categoryReviews.map((review) => {
             return (

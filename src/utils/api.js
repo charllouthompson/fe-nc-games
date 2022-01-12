@@ -11,8 +11,28 @@ export const getCategories = () => {
 }
 
 export const getReviewsByCategories = (category) => {
-    return gamesApi.get(`/reviews?${category}`).then((response) => {
+    return gamesApi.get(`/reviews?category=${category}`).then((response) => {
         return response.data.reviews
+    })
+}
+
+export const getAllReviews = () => {
+    return gamesApi.get('/reviews').then((response) => {
+        return response.data.reviews
+    })
+}
+
+export const getReviewById = (review_id) => {
+    return gamesApi.get(`/reviews/${review_id}`).then((response) => {
+        return response.data.review
+    })
+}
+
+export const upvoteReview = (review_id) => {
+    return gamesApi.patch(`/reviews/${review_id}`, {
+        inc_votes: 1
+    }).then((response) => {
+        return response.data.review.votes
     })
 }
 

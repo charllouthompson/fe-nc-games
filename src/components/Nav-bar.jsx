@@ -6,8 +6,13 @@ const NavBar = ({navCategories}) => {
     return (
       <nav>
         <p>
+        <Link to={`/`}>
+          <p>home</p>
+        </Link>
+        </p>
+        <p>
         <Link to={`/reviews/all`}>
-          <p>Home</p>
+          <p>all reviews</p>
         </Link>
         </p>
         <NavCategories navCategories={navCategories} />

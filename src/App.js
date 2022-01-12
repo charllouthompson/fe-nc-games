@@ -7,6 +7,7 @@ import { getCategories } from './utils/api'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReviewsByCategory from './components/Reviews-by-category';
 import AllReviews from './components/All-reviews';
+import ReviewCard from './components/Review-card'
 
 function App() {
   const [navCategories, setNavCategories] = useState([])
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<FrontpageList navCategories={navCategories} />} />
         <Route path="/reviews/all" element={<AllReviews />} />
         <Route path="/reviews/:category" element={<ReviewsByCategory />} />
+        <Route path="/reviews/:category/:review_id" element={<ReviewCard />} />
         
 
 
