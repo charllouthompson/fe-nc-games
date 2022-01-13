@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getReviewById } from "../utils/api";
-import UpvoteReview from "./Upvote-review";
+import VoteReview from "./Vote-review";
 
 
 const ReviewCard = () => {
@@ -12,17 +12,26 @@ const ReviewCard = () => {
             setSingleReview(reviewData)
         })
     }, [])
-
+    const category = singleReview.category
     return (
         <div>
-            <p>{singleReview.title}</p>
-            <p>{singleReview.category}</p>
-            <p>{singleReview.owner}</p>
+            <h2>{singleReview.title}</h2>
+            <p>Posted by {singleReview.owner}</p>
             <img src={singleReview.img_url} alt="game avatar"/>
             <p>{singleReview.review_body}</p>
-            <UpvoteReview review_id={review_id}/>
+            <VoteReview review_id={review_id}/>
             <p>Comments: {singleReview.comment_count}</p>
-            <button>See comments...</button>
+            <button>
+                <Link to={`/reviews/${category}/${review_id}/comments`}>
+                    See comments
+                </Link>
+            </button>
+            <button>
+                <Link to={`/reviews/${category}/${review_id}/post`}>
+                    Post a comment
+                </Link>
+            </button>
+                
         </div>
     )
 

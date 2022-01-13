@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
-import { getReviewById, upvoteReview } from "../utils/api";
+import { getReviewById, upvoteReview, downvoteReview } from "../utils/api";
 
 
-const UpvoteReview = ({review_id}) => {
+const VoteReview = ({review_id}) => {
     const [votes, setVotes] = useState()
     const reviewId = review_id
-    const handleClick = () => {
+    const handleLike = () => {
         upvoteReview(reviewId).then((newVotes) => {
+            setVotes(newVotes)
+        })
+    }
+    const handleDislike = () => {
+        downvoteReview(reviewId).then((newVotes) => {
             setVotes(newVotes)
         })
     }
@@ -15,16 +20,17 @@ const UpvoteReview = ({review_id}) => {
             const votes = review.votes
             setVotes(votes)
         })
-    }, [handleClick])
+    }, [handleLike, handleDislike])
     return (
         <div>
             <p>Votes: {votes}</p>
-            <button onClick={handleClick}>Like!</button>
+            <button onClick={handleLike}>Like</button>
+            <button onClick={handleDislike}>Dislike</button>
         </div>
     )
 }
 
-export default UpvoteReview;
+export default VoteReview;
 
 
 

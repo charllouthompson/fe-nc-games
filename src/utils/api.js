@@ -36,6 +36,58 @@ export const upvoteReview = (review_id) => {
     })
 }
 
+export const downvoteReview = (review_id) => {
+    return gamesApi.patch(`/reviews/${review_id}`, {
+        inc_votes: -1
+    }).then((response) => {
+        return response.data.review.votes
+    })
+}
+
+export const upvoteComment = (comment_id) => {
+    return gamesApi.patch(`/comments/${comment_id}`, {
+        inc_votes: 1
+    }).then((response) => {
+        return response.data.comment.votes
+    })
+}
+
+export const downvoteComment = (comment_id) => {
+    return gamesApi.patch(`/comments/${comment_id}`, {
+        inc_votes: -1
+    }).then((response) => {
+        return response.data.comment.votes
+    })
+}
+
+export const getCommentsByReview = (review_id) => {
+    return gamesApi.get(`/reviews/${review_id}/comments`).then((response) => {
+        return response.data.comments
+    })
+}
+
+export const deleteCommentById = (comment_id) => {
+    return gamesApi.delete(`/comments/${comment_id}`).then((response) => {
+        console.log("Comment deleted")
+        return response.data 
+    })
+}
+
+export const postCommentToReview = (review_id, usernameInput, commentInput) => {
+    console.log("in api")
+    console.log("id = ", review_id)
+    console.log("username = ", usernameInput)
+    console.log("body = ", commentInput)
+
+    return gamesApi.post(`/reviews/${review_id}/comments`, {
+        username: usernameInput,
+        body: commentInput
+    }).then((response) => {
+        return response
+    })
+
+
+}
 
 
 

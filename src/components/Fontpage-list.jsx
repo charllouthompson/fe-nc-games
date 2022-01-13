@@ -5,6 +5,8 @@ const FrontpageList = ({ navCategories }) => {
 
     return (
         <div>
+        <h2>Welcome!</h2>
+        <h2>Find a review</h2>
         <ul>
             <li>
                 <Link to={`/reviews/all`}>

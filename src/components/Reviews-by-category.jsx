@@ -3,7 +3,7 @@ import { getReviewsByCategories } from "../utils/api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const ReviewsByCategory = () => {
+const ReviewsByCategory = ({ navCategories }) => {
     const { category } = useParams()
     const [categoryReviews, setCategoryReviews] = useState([])
     useEffect(() => {
@@ -13,6 +13,7 @@ const ReviewsByCategory = () => {
     }, [category])
     return (
         <div>
+            <h2>{category}</h2>
             <ul>
             {categoryReviews.map((review) => {
             return (
