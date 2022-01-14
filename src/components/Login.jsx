@@ -4,13 +4,20 @@ import { UserContext } from "../contexts/User-context";
 const Login = () => {
     const [username, setUsername] = useState('')
 
-    const { setUser } = useContext(UserContext);
+    const { setUser, user } = useContext(UserContext);
 
     const handleUserSelection = (event) => {
         const inputVal = event.target.value
-        setSortBy(inputVal)
-        setUser(inputVal)
+        console.log(inputVal)
+        setUsername(inputVal)
+        setUser({ username })
+        
     }
+
+
+    console.log("username", username)
+    console.log("user", user)
+
 
     return (
         <form>

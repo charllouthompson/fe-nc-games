@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
         setUser({})
     }
     
-    const isLoggedIn = !!user.username;
+    const isLoggedIn = !!user.username
 
     return (
         <UserContext.Provider value={{ user, setUser, logout, isLoggedIn}}>
