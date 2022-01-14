@@ -1,15 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getCommentsByReview, deleteCommentById } from "../utils/api";
 import { useParams } from "react-router-dom";
 import VoteComment from "./Vote-comment";
+import { UserContext } from "../contexts/User-context";
 
 
 const CommentsByReview = () => {
     const [comments, setComments] = useState([])
     const { review_id } = useParams()
-
-    const deleteOnClick = (id) => {
-        deleteCommentById(id)
+    const { user } = useContext(UserContext);
+    const defaultUser = user.username
+    
+    const deleteOnClick = (id, author) => {
+        if (author === defaultUser) {
+            deleteCommentById(id)
+        }
+        
     }
 
     useEffect(() => {
@@ -30,7 +36,7 @@ const CommentsByReview = () => {
                     {/* <VoteComment comment_id={comment.comment_id} review_id={review_id}/> */}
 
                     <button onClick={() => {
-                         deleteOnClick(comment.comment_id)
+                         deleteOnClick(comment.comment_id, comment.author)
                         }}>Delete</button>
                 </li>
             );

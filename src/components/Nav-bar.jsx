@@ -1,5 +1,3 @@
-
-import NavCategories from "./Nav-categories";
 import { Link } from "react-router-dom";
 
 const NavBar = ({navCategories}) => {
@@ -11,11 +9,10 @@ const NavBar = ({navCategories}) => {
         </Link>
         </p>
         <p>
-        <Link to={`/reviews/all`}>
+        <Link to={`/reviews`}>
           <p>all reviews</p>
         </Link>
         </p>
-        <NavCategories navCategories={navCategories} />
       </nav>
     );
 };

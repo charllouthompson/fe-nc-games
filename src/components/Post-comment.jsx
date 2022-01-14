@@ -1,14 +1,13 @@
 import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { postCommentToReview } from "../utils/api";
+import { UserContext } from "../contexts/User-context";
 
 const PostComment = () => {
     const { review_id } = useParams()
-    const [usernameInput, setUsernameInput] = useState('')
-    const handleUsernameChange = (event) => {
-        const inputVal = event.target.value
-        setUsernameInput(inputVal)
-    }
+    const { user } = useContext(UserContext);
+    const defaultUser = user.username
+
     const [commentInput, setCommentInput] = useState('')
     const handleCommentChange = (event) => {
         const inputVal = event.target.value
@@ -16,8 +15,7 @@ const PostComment = () => {
     }
     const handleSubmit = (event) => {
         event.preventDefault()
-        postCommentToReview(review_id, usernameInput, commentInput).then((response) => {
-            setUsernameInput('')
+        postCommentToReview(review_id, defaultUser, commentInput).then((response) => {
             setCommentInput('')
         })   
     }
@@ -28,11 +26,8 @@ const PostComment = () => {
     return (
         <div>
             <h2>Post a comment</h2>
+            <p>Username: {defaultUser}</p>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username: </label>
-                <input id="username" type="text" onChange={handleUsernameChange} value={usernameInput}/>
-                <span id="username-err"></span>
-                <br/>
                 <label htmlFor="comment-body">Comment: </label>
                 <input id="comment-body" type="text" onChange={handleCommentChange} value={commentInput}/>
                 <span id="comment-body-err"></span>

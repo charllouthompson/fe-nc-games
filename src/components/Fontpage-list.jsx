@@ -9,11 +9,11 @@ const FrontpageList = ({ navCategories }) => {
         <h2>Find a review</h2>
         <ul>
             <li>
-                <Link to={`/reviews/all`}>
-                View all reviews
+                <Link to={`/reviews`}>
+                View reviews
                 </Link>
             </li>
-            {categories.map((category) => {
+            {/* {categories.map((category) => {
             return (
                 <li>
                     <Link to={`/reviews/${category.slug}`}>
@@ -21,7 +21,7 @@ const FrontpageList = ({ navCategories }) => {
                     </Link>
                 </li>
             );
-            })}
+            })} */}
         </ul>
         </div>
     )

@@ -1,9 +1,4 @@
-As a user, I should be able to...
-
-    post a new comment to an existing review (as a default logged in user. e.g. 'jessjelly').
-    delete my own comments (as a default logged in user. e.g. 'jessjelly').
-
-Error-handling: As a user, I should...
+ Error-handling: As a user, I should...
 
     see an appropriate error if I go on a non-existent path / a path for a non-existent review / topic.
     not be allowed to post a comment if I have not filled in all of the form boxes.

@@ -34,33 +34,46 @@ export const getAllReviews = (sortBy) => {
     }
 }
 
+
+export const getReviews = (category, sortBy, orderBy) => {
+    return gamesApi.get('/reviews', {
+        params: {
+            category: category,
+            sort_by: sortBy,
+            order: orderBy
+        }
+    }).then((response) => {
+        return response.data.reviews
+    })
+
+
+
+}
+
+
+
+
+
+
+
+
 export const getReviewById = (review_id) => {
     return gamesApi.get(`/reviews/${review_id}`).then((response) => {
         return response.data.review
     })
 }
 
-export const upvoteReview = (review_id) => {
+export const voteReview = (review_id, value) => {
+    let voteVal = 0
+    if (value === 'like') {
+        voteVal = 1
+    } else if (value === 'dislike') {
+        voteVal = -1
+    }
     return gamesApi.patch(`/reviews/${review_id}`, {
-        inc_votes: 1
+        inc_votes: voteVal
     }).then((response) => {
         return response.data.review.votes
-    })
-}
-
-export const downvoteReview = (review_id) => {
-    return gamesApi.patch(`/reviews/${review_id}`, {
-        inc_votes: -1
-    }).then((response) => {
-        return response.data.review.votes
-    })
-}
-
-export const upvoteComment = (comment_id) => {
-    return gamesApi.patch(`/comments/${comment_id}`, {
-        inc_votes: 1
-    }).then((response) => {
-        return response.data.comment.votes
     })
 }
 
