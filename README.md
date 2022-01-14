@@ -1,10 +1,6 @@
 As a user, I should be able to...
 
     post a new comment to an existing review (as a default logged in user. e.g. 'jessjelly').
-    sort reviews by:
-        created_at
-        comment_count
-        votes
     delete my own comments (as a default logged in user. e.g. 'jessjelly').
 
 Error-handling: As a user, I should...
